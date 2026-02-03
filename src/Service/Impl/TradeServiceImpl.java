@@ -2,9 +2,12 @@ package Service.Impl;
 
 import entity.Trade;
 import Service.TradeService;
+import Repository.tradeRepository;
 import java.util.List;
 
 public class TradeServiceImpl implements TradeService{
+    private final tradeRepository trp = new tradeRepository();
+
     @Override
     public double calculateValue(List<Trade> trades) {
         double buyTotal = 0.0;
@@ -19,5 +22,17 @@ public class TradeServiceImpl implements TradeService{
             }
         }
         return sellTotal - buyTotal;
+    }
+
+
+
+    @Override
+    public void saveTradeToFile(Trade tr) {
+        trp.save(tr);
+    }
+
+    @Override
+    public List<Trade> loadTrades(){
+        return trp.load();
     }
 }
