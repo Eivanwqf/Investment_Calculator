@@ -1,7 +1,6 @@
 package Service;
 
 import entity.Trade;
-import Repository.tradeRepository;
 import java.util.List;
 
 public interface TradeService {

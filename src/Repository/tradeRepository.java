@@ -12,7 +12,7 @@ public class tradeRepository {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public void save(Trade tr){
         try (FileWriter fw = new FileWriter(fileName, true);
-             BufferedWriter bw = new BufferedWriter(fw);){
+             BufferedWriter bw = new BufferedWriter(fw)){
             String formattedTime = tr.getTime().format(dtf);
             String data = String.format("%s,%s,%f,%.2f,%f\n",
                     formattedTime,
