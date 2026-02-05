@@ -44,8 +44,14 @@ public class Main {
         }
 
         //Processing unit
-        TradeServiceImpl tp = new TradeServiceImpl();
-        double result = tp.calculateValue(trades);
+
+        /*
+
+            此处添加输入当前价格,计算剩余含金量
+
+        */
+
+        double result = tradeService.calculateValue(trades);
         System.out.print("最终的收益为：");
         System.out.printf("%.2f", result);
     }

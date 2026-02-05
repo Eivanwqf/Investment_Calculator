@@ -11,10 +11,16 @@ public class tradeRepository {
     private final String fileName = "MyTrades.csv";//csv?
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public void save(Trade tr){
+        //1. 先读取现有数据，找出目前最大的id
+        List<Trade> currentTradesList = load();
+
+
         try (FileWriter fw = new FileWriter(fileName, true);
              BufferedWriter bw = new BufferedWriter(fw)){
             String formattedTime = tr.getTime().format(dtf);
-            String data = String.format("%s,%s,%f,%.2f,%f\n",
+
+            String data = String.format("%d,%s,%s,%f,%.2f,%f\n",
+                    tr.getId(),
                     formattedTime,
                     tr.getType(),
                     tr.getAmount(),
@@ -38,17 +44,17 @@ public class tradeRepository {
             String line;
             while((line=br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length != 5){
+                if (parts.length != 6){
                     continue;
                 }
-                String time = parts[0];
-                LocalDateTime dateTime = LocalDateTime.parse(parts[0], dtf);
-                Trade.TradeType tradeType = Trade.TradeType.valueOf(parts[1]);
-                double amount = Double.parseDouble(parts[2]);
-                double price = Double.parseDouble(parts[3]);
-                double value = Double.parseDouble(parts[4]);
+                long id = Long.parseLong(parts[0]);
+                String time = parts[1];
+//                LocalDateTime dateTime = LocalDateTime.parse(parts[1], dtf);
+                Trade.TradeType tradeType = Trade.TradeType.valueOf(parts[2]);
+                double amount = Double.parseDouble(parts[3]);
+                double price = Double.parseDouble(parts[4]);
 
-                Trade tr = new Trade(time, tradeType, price, amount, value);
+                Trade tr = new Trade(id, time, tradeType, price, amount);//后面还有一个在Trade下重写的toString用来算总价格
                 tradesList.add(tr);
             }
         }catch (Exception e){

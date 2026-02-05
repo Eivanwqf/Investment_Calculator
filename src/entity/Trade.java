@@ -6,7 +6,7 @@ public class Trade {
     public enum TradeType{
         BUY,
         SELL
-    };
+    }
     private TradeType type;
     private double price;
     private double amount;
@@ -25,12 +25,12 @@ public class Trade {
         this.time = LocalDateTime.now();
     }
 
-    public Trade(String strTime, TradeType type, double price, double amount, double value){
+    public Trade(long id, String strTime, TradeType type, double price, double amount){
+        this.id = id;
         this.strTime = strTime;
         this.type = type;
         this.price = price;
         this.amount = amount;
-        calcValue();
     }//用于读取csv表格中的数据.
 
     public long getId(){
@@ -71,8 +71,8 @@ public class Trade {
 
     @Override
     public String toString(){
-        return String.format("时间：%s | 类型：%5s | 数量：%.3f | 单价：%.2f | 总价：%.2f\n",
-                strTime, type, amount, price, calcValue());
+        return String.format("交易id：%d | 时间：%s | 类型：%5s | 数量：%.3f | 单价：%.2f | 总价：%.2f\n",
+                id, strTime, type, amount, price, calcValue());
     }
 }
 /*用户输入数据 -> 变成trade对象 -> 存list<array>数组，交给计算模块*/
