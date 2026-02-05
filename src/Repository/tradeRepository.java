@@ -10,10 +10,6 @@ public class tradeRepository {
     private final String fileName = "MyTrades.csv";//csv?
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public void save(Trade tr){
-        //1. 先读取现有数据，找出目前最大的id
-        List<Trade> currentTradesList = load();
-
-
         try (FileWriter fw = new FileWriter(fileName, true);
              BufferedWriter bw = new BufferedWriter(fw)){
             String formattedTime = tr.getTime().format(dtf);
