@@ -1,6 +1,7 @@
-import Service.Impl.TradeServiceImpl;
+import Service.*;
+import Service.Impl.*;
 import entity.Trade;
-import util.Input;
+import util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +9,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        List<Trade> trades = new ArrayList<>();
-        TradeServiceImpl tradeService = new TradeServiceImpl();
+        Scanner sc = new Scanner(System.in); //导入一个扫描对象输入
+        List<Trade> trades = new ArrayList<>();//声明一个列表对象，存储所有交易
+        TradeService tradeService = new TradeServiceImpl();//声明一个交易服务接口对象
 
-        List<Trade> history = tradeService.loadTrades();
-        System.out.println("==========历史账单=========");
-        for (Trade tr: history){
-            System.out.print(tr);
-        }
-        System.out.println("==========================");
+        Print.PrintAllHistory();//输出所有的交易记录
+
         while (true) {
-            inputMenu();
+            Input.inputMenu();
             Trade.TradeType tt = null;
 
             String typeInput = sc.next();
@@ -30,7 +27,6 @@ public class Main {
                 tt = Trade.TradeType.SELL;
             }
             else  {
-//                System.out.println("DEBUG: Stop the input.");
                 break;
             }
 
@@ -52,12 +48,5 @@ public class Main {
         double result = tp.calculateValue(trades);
         System.out.print("最终的收益为：");
         System.out.printf("%.2f", result);
-    }
-
-    private static void inputMenu() {
-        System.out.println("输入买卖的种类:");
-        System.out.println("   1.   买入");
-        System.out.println("   2.   卖出");
-        System.out.println("  其他.  停止输入");
     }
 }

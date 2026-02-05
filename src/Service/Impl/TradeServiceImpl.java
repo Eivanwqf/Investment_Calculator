@@ -6,7 +6,7 @@ import Repository.tradeRepository;
 import java.util.List;
 
 public class TradeServiceImpl implements TradeService{
-    private final tradeRepository trp = new tradeRepository();
+    private final tradeRepository tradeRepo = new tradeRepository();
 
     @Override
     public double calculateValue(List<Trade> trades) {
@@ -28,11 +28,11 @@ public class TradeServiceImpl implements TradeService{
 
     @Override
     public void saveTradeToFile(Trade tr) {
-        trp.save(tr);
+        tradeRepo.save(tr);
     }
 
     @Override
     public List<Trade> loadTrades(){
-        return trp.load();
+        return tradeRepo.load();
     }
 }

@@ -12,6 +12,7 @@ public class Trade {
     private double amount;
     private LocalDateTime time;
     private String strTime;
+    private long id;
 
 //    public entity.Trade(){
 //        System.out.println("【debug】一个新的交易已创建");
@@ -32,6 +33,13 @@ public class Trade {
         calcValue();
     }//用于读取csv表格中的数据.
 
+    public long getId(){
+        return id;
+    }
+    public void setId(long id){
+        this.id = id;
+    }
+
     public TradeType getType() {
         return type;
     }
@@ -45,15 +53,18 @@ public class Trade {
     public double getPrice(){
         return price;
     }
+
     public void setAmount(double amount) {
         this.amount = amount;
     }
     public double getAmount(){
         return amount;
     }
+
     public LocalDateTime getTime(){
         return time;
     }
+
     public double calcValue(){
         return price * amount;
     }
