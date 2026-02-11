@@ -17,14 +17,22 @@ public class Print {
         }
         System.out.println("==========================");
     }
-    public static void mainMenu(){
-        System.out.println("┌======================┐");
-        System.out.println("│       这是主菜单       │");
-        System.out.println("│1--------------输入账单│");
-        System.out.println("│2--------------展示账单│");
-        System.out.println("│3--------------处理账单│");
-        System.out.println("│0-----------------结束│");
-        System.out.println("└======================┘");
+    public static void mainMenu() {
+        // 定义颜色常量
+        String RESET = "\u001B[0m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
+        String RED = "\u001B[31m";
+        String CYAN = "\u001B[36m";
+
+        System.out.println("╔═══════════════════════════════╗" + RESET);
+        System.out.println("║       INVESTMENT MANAGER      ║" + RESET);
+        System.out.println("╠═══════════════════════════════╣" + RESET);
+        System.out.println("║  " + GREEN  + "1. 输入账单 （Input）   " + RESET + "       ║");
+        System.out.println("║  " + YELLOW + "2. 展示账单 （Show）    " + RESET + "       ║");
+        System.out.println("║  " + CYAN   + "3. 处理账单 （Process） " + RESET + "       ║");
+        System.out.println("║  " + RED    + "0. 退出程序 （Exit）    " + RESET + "       ║");
+        System.out.println("╚═══════════════════════════════╝");
     }
 
     public static void printRevenue(Scanner sc,List<Trade> trades){

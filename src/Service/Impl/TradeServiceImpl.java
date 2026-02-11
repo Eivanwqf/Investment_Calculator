@@ -44,9 +44,14 @@ public class TradeServiceImpl implements TradeService{
             System.out.println("错误！卖出比买入要多，这不对了。");
             return 0;
         }
+        for (Trade tr: trades) {
+            System.out.println("DEBUG: 正在计算 -> " + tr.getType() + " 价值:" + tr.calcValue() + " 数量:" + tr.getAmount());
+            // ... 原有的逻辑
+        }
         return sellTotal - buyTotal + (currentPrice * (buyAmount - sellAmount));
     }
     //realTotal = sold - bought + current gold net worth
+
 //    public double calculateRealProfit(List<Trade> trades) {
 //    }
 
