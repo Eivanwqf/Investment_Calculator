@@ -24,26 +24,31 @@ public class TradeServiceImpl implements TradeService{
 
 
     @Override
-    public double calculateValue(List<Trade> trades) {
-        double buyTotal = 0.0;
-        double sellTotal = 0.0;
+    public double calculateValue(List<Trade> trades, double currentPrice) {
+        double buyTotal = 0.0; //买入所有价格
+        double sellTotal = 0.0;//卖出所有价格
+        double buyAmount = 0.0;
+        double sellAmount = 0.0;
 
         for (Trade tr: trades) {
-            if (tr.getType() == Trade.TradeType.BUY) {
+            if (tr.getType() == Trade.TradeType.BUY) { //读取所有买入
                 buyTotal += tr.calcValue();
+                buyAmount += tr.getAmount();
             }
-            else if (tr.getType() == Trade.TradeType.SELL) {
+            else if (tr.getType() == Trade.TradeType.SELL) { //读取所有卖出
                 sellTotal += tr.calcValue();
+                sellAmount += tr.getAmount();
             }
         }
-        return sellTotal - buyTotal;
+        if (sellAmount > buyAmount) {
+            System.out.println("错误！卖出比买入要多，这不对了。");
+            return 0;
+        }
+        return sellTotal - buyTotal + (currentPrice * (buyAmount - sellAmount));
     }
-
-    //realTotal = sold - bought + current gold networth
-    public double calculateRealProfit(List<Trade> trades) {
-
-        return 0.0;
-    }
+    //realTotal = sold - bought + current gold net worth
+//    public double calculateRealProfit(List<Trade> trades) {
+//    }
 
     @Override
     public void saveTradeToFile(Trade tr) {
